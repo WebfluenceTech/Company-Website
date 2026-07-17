@@ -1135,3 +1135,172 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .ops-grid { grid-template-columns: repeat(2, 1fr); }
   .hero-cta .btn { width: 100%; justify-content: center; }
 }
+
+/* ============================================================
+   Subpages (about.html, work.html)
+   ============================================================ */
+
+.subhero {
+  position: relative;
+  padding: 148px 0 64px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.subhero .hero-bg { }
+.subhero-inner { position: relative; max-width: 760px; }
+.subhero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.032em;
+  text-wrap: balance;
+}
+.subhero p {
+  margin-top: 22px;
+  max-width: 600px;
+  font-size: 1.12rem;
+  color: var(--text-2);
+}
+.crumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 22px;
+  font-size: 0.82rem;
+  color: var(--text-3);
+}
+.crumb a { color: var(--text-2); }
+.crumb a:hover { color: var(--text); }
+
+/* founder / about story */
+.prose { max-width: 680px; }
+.prose p { color: var(--text-2); font-size: 1.05rem; margin-bottom: 20px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--text); font-weight: 600; }
+
+.leaders {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.leader {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-raise);
+  padding: 24px;
+}
+.leader-avatar {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.5rem;
+  color: #17100b;
+  background: var(--ember-grad);
+  margin-bottom: 18px;
+}
+.leader h3 { font-size: 1.05rem; font-weight: 600; }
+.leader .role { font-size: 0.85rem; color: var(--ember-2); margin-top: 2px; }
+.leader p { margin-top: 12px; font-size: 0.9rem; color: var(--text-3); }
+
+/* open roles list */
+.roles { border-top: 1px solid var(--border); }
+.role-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 4px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.18s ease, padding 0.18s ease;
+}
+.role-row:hover { background: rgba(255,255,255,0.02); padding-left: 14px; padding-right: 14px; }
+.role-main { flex: 1; min-width: 0; }
+.role-main h3 { font-size: 1.08rem; font-weight: 600; }
+.role-main span { font-size: 0.86rem; color: var(--text-3); }
+.role-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+.role-badge {
+  font-size: 0.76rem;
+  color: var(--text-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px 11px;
+  white-space: nowrap;
+}
+.role-row .btn { flex-shrink: 0; }
+
+/* work index cards */
+.worklist { display: grid; gap: 20px; }
+.workcard {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-raise);
+  overflow: hidden;
+  transition: border-color 0.25s ease, transform 0.25s var(--ease);
+}
+.workcard:hover { border-color: rgba(255,140,80,0.3); transform: translateY(-3px); }
+.workcard-visual {
+  position: relative;
+  min-height: 220px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid var(--border);
+  background:
+    radial-gradient(60% 80% at 30% 20%, rgba(255,122,69,0.12), transparent 70%),
+    radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 100% 100%, 20px 20px;
+}
+.workcard-brand { font-size: 1.5rem; color: var(--text); }
+.workcard-big {
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  background: var(--ember-grad);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.workcard-big small { display: block; font-size: 0.9rem; font-weight: 400; color: var(--text-2); -webkit-text-fill-color: var(--text-2); margin-top: 6px; }
+.workcard-body { padding: 30px; }
+.workcard-tag {
+  font-size: 0.74rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ember);
+}
+.workcard-body h3 { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.02em; margin: 12px 0; }
+.workcard-body p { color: var(--text-2); font-size: 0.95rem; }
+.workcard-results {
+  display: flex; gap: 26px; flex-wrap: wrap; margin-top: 22px;
+  padding-top: 20px; border-top: 1px solid var(--border);
+}
+.workcard-results div { display: flex; flex-direction: column; }
+.workcard-results strong { font-size: 1.3rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.workcard-results span { font-size: 0.78rem; color: var(--text-3); }
+
+/* cta-band reused on subpages */
+.cta-band {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-raise);
+  padding: 72px 0;
+  text-align: center;
+}
+.cta-band h2 { margin-bottom: 14px; }
+.cta-band p { color: var(--text-2); max-width: 520px; margin: 0 auto 28px; }
+.cta-band .hero-cta { justify-content: center; }
+
+@media (max-width: 1020px) {
+  .leaders { grid-template-columns: 1fr; }
+  .workcard { grid-template-columns: 1fr; }
+  .workcard-visual { border-right: 0; border-bottom: 1px solid var(--border); min-height: 180px; }
+}
+@media (max-width: 640px) {
+  .role-row { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .role-row .btn { width: 100%; justify-content: center; }
+}
+
+.work-more { margin-top: 40px; text-align: center; }
