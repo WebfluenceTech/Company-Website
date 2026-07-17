@@ -1258,7 +1258,7 @@ section[id] { scroll-margin-top: 84px; }
   overflow: hidden;
   transition: border-color 0.25s ease, transform 0.25s var(--ease);
 }
-.workcard:hover { border-color: rgba(255,140,80,0.3); transform: translateY(-3px); }
+.workcard:hover { border-color: rgba(110,190,255,0.35); transform: translateY(-3px); }
 .workcard-visual {
   position: relative;
   min-height: 220px;
@@ -1453,4 +1453,81 @@ section[id] { scroll-margin-top: 84px; }
 
 @media (max-width: 860px) {
   .rotator-wrap { white-space: normal; }
+}
+
+/* ============================================================
+   Case study detail pages
+   ============================================================ */
+
+.cs-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.cs-meta-item { display: flex; flex-direction: column; gap: 3px; }
+.cs-meta-item span { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); }
+.cs-meta-item strong { font-size: 0.92rem; font-weight: 600; color: var(--text); }
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.stat-card {
+  padding: 24px 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-raise);
+}
+.stat-card .num {
+  display: block;
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  background: var(--acc-grad);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.stat-card .lbl { display: block; margin-top: 6px; font-size: 0.84rem; color: var(--text-2); }
+
+.callout {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  margin-top: 28px;
+  padding: 20px 24px;
+  border-left: 2px solid var(--acc);
+  background: rgba(76, 214, 255, 0.05);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.callout strong { display: block; color: var(--text); font-size: 1rem; margin-bottom: 4px; }
+.callout span { color: var(--text-2); font-size: 0.92rem; }
+
+.case-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+}
+.case-nav a {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 46%;
+  color: var(--text-2);
+  transition: color 0.15s ease;
+}
+.case-nav a:hover { color: var(--text); }
+.case-nav a.next { text-align: right; align-items: flex-end; }
+.case-nav .cn-label { font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); }
+.case-nav .cn-title { font-size: 1rem; font-weight: 600; color: var(--text); }
+
+@media (max-width: 760px) {
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .case-nav { flex-direction: column; }
+  .case-nav a, .case-nav a.next { max-width: 100%; align-items: flex-start; text-align: left; }
 }

@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bluepeak Energy: Telemetry for a Solar Fleet That Tripled — Meridian</title>
+  <meta name="description" content="How Meridian rebuilt Bluepeak Energy's telemetry pipeline to absorb 3x the data volume while cutting cloud spend 42% — 4.2M events per minute, 99.99% uptime.">
+  <meta property="og:title" content="Bluepeak Energy: Telemetry for a Solar Fleet That Tripled — Meridian">
+  <meta property="og:description" content="Cost is a reliability feature. The full case study.">
+  <meta name="theme-color" content="#05080f">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2305080f'/%3E%3Cpath d='M8 23V9l8 9 8-9v14' stroke='%234cd6ff' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="nav is-scrolled" id="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html" aria-label="Meridian home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="8" fill="currentColor" opacity="0.08"/>
+          <path d="M8 23V9l8 9 8-9v14" stroke="url(#mg)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs><linearGradient id="mg" x1="8" y1="9" x2="24" y2="23" gradientUnits="userSpaceOnUse"><stop stop-color="#4cd6ff"/><stop offset="1" stop-color="#a78bfa"/></linearGradient></defs>
+        </svg>
+        <span class="brand-name">Meridian</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html#capabilities">Capabilities</a>
+        <a href="index.html#platform">Platform</a>
+        <a href="work.html" aria-current="page">Work</a>
+        <a href="index.html#process">Process</a>
+        <a href="about.html">Company</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-ghost" href="index.html#contact">Talk to an engineer</a>
+        <a class="btn btn-primary" href="index.html#contact">Start a project</a>
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu"><span></span><span></span></button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html#capabilities">Capabilities</a>
+      <a href="index.html#platform">Platform</a>
+      <a href="work.html">Work</a>
+      <a href="index.html#process">Process</a>
+      <a href="about.html">Company</a>
+      <a class="btn btn-primary" href="index.html#contact">Start a project</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="subhero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="container">
+        <div class="subhero-inner" data-reveal>
+          <p class="crumb"><a href="index.html">Home</a> <span>/</span> <a href="work.html">Work</a> <span>/</span> Bluepeak</p>
+          <span class="case-tag">Energy · Cloud &amp; Telemetry</span>
+          <h1 style="margin-top:16px;">Telemetry for a solar fleet that tripled while the bill went down</h1>
+          <p>Bluepeak's distributed solar assets were generating more data than their pipeline could hold. Meridian rebuilt ingest, added anomaly detection, and cut cloud spend 42% — while absorbing three times the volume.</p>
+          <div class="cs-meta">
+            <div class="cs-meta-item"><span>Client</span><strong>Bluepeak Energy</strong></div>
+            <div class="cs-meta-item"><span>Industry</span><strong>Renewable energy</strong></div>
+            <div class="cs-meta-item"><span>Engagement</span><strong>10 weeks</strong></div>
+            <div class="cs-meta-item"><span>Team</span><strong>2 platform engineers</strong></div>
+            <div class="cs-meta-item"><span>Stack</span><strong>Rust · Kubernetes · ClickHouse</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAT STRIP -->
+    <section class="section" style="padding-top:64px; padding-bottom:56px;">
+      <div class="container">
+        <div class="stat-grid" data-reveal>
+          <div class="stat-card"><span class="num">−42%</span><span class="lbl">cloud spend</span></div>
+          <div class="stat-card"><span class="num">3×</span><span class="lbl">data volume absorbed</span></div>
+          <div class="stat-card"><span class="num">11 min</span><span class="lbl">mean time to detect faults</span></div>
+          <div class="stat-card"><span class="num">99.99%</span><span class="lbl">ingest uptime, 90-day window</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE PROBLEM -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head" data-reveal style="max-width:720px;">
+          <p class="eyebrow">The problem</p>
+          <h2 class="h2">A pipeline sized for last year's fleet</h2>
+        </div>
+        <div class="prose" data-reveal>
+          <p>Bluepeak operates distributed solar assets across a dozen sites, each inverter reporting telemetry every few seconds. When Meridian was engaged, the fleet had tripled in eighteen months and the ingest pipeline — a single-region managed database never designed for this write volume — was falling behind during peak generation hours, the exact moments when catching a failing inverter mattered most.</p>
+          <p>The response to volume growth had been to scale the database vertically, again and again. Cloud spend had grown faster than the fleet. Worse, the lag meant a failing inverter could go undetected for hours — lost generation that showed up as a line item nobody could explain until the monthly report.</p>
+          <div class="callout">
+            <div>
+              <strong>The reframe that changed the architecture</strong>
+              <span>Bluepeak came to us asking to fix performance. We told them the real problem was that cost and reliability were fighting each other — and that a correctly-shaped pipeline would fix both at once.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONSTRAINTS -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head" data-reveal style="max-width:720px;">
+          <p class="eyebrow">Constraints</p>
+          <h2 class="h2">What couldn't move during the rebuild</h2>
+        </div>
+        <ul class="check-list" data-reveal style="max-width:640px;">
+          <li><strong>No data loss during migration.</strong> Historical telemetry feeds regulatory and warranty reporting — years of it, non-negotiable.</li>
+          <li><strong>Operators couldn't be retrained mid-crisis.</strong> The existing Grafana dashboards had to keep working throughout the migration.</li>
+          <li><strong>Hardware diversity across sites.</strong> Four inverter vendors, four telemetry formats, inconsistent clock sync.</li>
+          <li><strong>Spend reduction was the mandate, not a nice-to-have.</strong> The board had already flagged infrastructure cost as unsustainable.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- APPROACH -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head" data-reveal style="max-width:720px;">
+          <p class="eyebrow">The approach</p>
+          <h2 class="h2">Cost is a reliability feature</h2>
+          <p class="section-sub">We moved hot telemetry to a columnar store, tiered the cold path to object storage, and right-sized the cluster against real load profiles instead of guesses.</p>
+        </div>
+
+        <div class="vignette" data-reveal>
+          <div class="vignette-copy">
+            <p class="eyebrow">Ingest &amp; hot path</p>
+            <h3>A Rust gateway that never falls behind</h3>
+            <p>A lightweight ingest gateway normalizes all four vendor formats at the edge and writes into ClickHouse, which handles the write-heavy, append-only nature of telemetry far better than a general-purpose relational database ever will. Ninety days of hot data lives here for fast operator queries.</p>
+            <a class="text-link" href="index.html#contact">Ask about our infra work →</a>
+          </div>
+          <div class="vignette-visual">
+            <div class="canvas-card" aria-hidden="true">
+              <div class="canvas-stage">
+                <svg class="canvas-lines" viewBox="0 0 520 260">
+                  <path class="flow" d="M112 60 C 180 60, 180 130, 238 130"/>
+                  <path class="flow" d="M122 200 C 180 200, 180 130, 238 130"/>
+                  <path class="flow" d="M362 130 C 388 130, 388 70, 402 70"/>
+                  <path class="flow" d="M362 130 C 388 130, 388 190, 402 190"/>
+                </svg>
+                <div class="node" style="--x:20px; --y:56px;"><span class="node-dot ok"></span>Inverters<small>4 vendors</small></div>
+                <div class="node" style="--x:20px; --y:196px;"><span class="node-dot ok"></span>Site gateways<small>edge buffer</small></div>
+                <div class="node node-hot" style="--x:258px; --y:126px;"><span class="node-dot acc"></span>Ingest core<small>Rust · 4.2M/min</small></div>
+                <div class="node" style="--x:412px; --y:66px;"><span class="node-dot ok"></span>ClickHouse<small>hot, 90d</small></div>
+                <div class="node" style="--x:412px; --y:186px;"><span class="node-dot ok"></span>Cold storage<small>object store</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="vignette vignette-flip" data-reveal>
+          <div class="vignette-copy">
+            <p class="eyebrow">Right-sizing</p>
+            <h3>The cluster was sized from real load, not habit</h3>
+            <p>Before touching Kubernetes node counts, we captured two weeks of actual peak-generation traffic and load-tested against it. The cluster that resulted was smaller than the one it replaced — because the old one had been sized by incremental panic-scaling, not by data.</p>
+            <a class="text-link" href="index.html#contact">See our cost-reduction approach →</a>
+          </div>
+          <div class="vignette-visual">
+            <div class="ops-card" aria-hidden="true">
+              <div class="ops-row"><span>Ingest availability — 90 days</span><strong class="ok-text">99.99%</strong></div>
+              <div class="uptime-bars">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+              <div class="ops-grid">
+                <div class="ops-stat"><span>Ingest</span><strong>Rust</strong></div>
+                <div class="ops-stat"><span>Store</span><strong>ClickHouse</strong></div>
+                <div class="ops-stat"><span>Orchestration</span><strong>Kubernetes</strong></div>
+                <div class="ops-stat"><span>Observability</span><strong>Grafana</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head" data-reveal style="max-width:720px;">
+          <p class="eyebrow">Results</p>
+          <h2 class="h2">One quarter post-migration</h2>
+        </div>
+        <div class="prose" data-reveal>
+          <p>The new pipeline absorbs three times the write volume of the old one on a smaller, cheaper cluster — cloud spend is down 42% even as the fleet keeps growing. Anomaly detection, built on the same hot-path data, now flags a failing inverter within 11 minutes on average, down from a detection window that used to run into hours.</p>
+          <p>Operators kept their existing Grafana dashboards throughout — the migration was invisible to the people who depend on this data every day, which was the point.</p>
+        </div>
+        <div class="quote quote-featured" data-reveal style="margin-top:32px; max-width:720px;">
+          <blockquote>"Meridian treats a deadline like an SLO. Nine months, zero slipped milestones, and the platform hasn't paged us once."</blockquote>
+          <figcaption><strong>Marcus Oyelaran</strong><span>VP Engineering, Bluepeak Energy</span></figcaption>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head" data-reveal style="max-width:720px;">
+          <p class="eyebrow">Timeline</p>
+          <h2 class="h2">10 weeks, three phases</h2>
+        </div>
+        <div class="steps" data-reveal>
+          <div class="step"><span class="step-num">Wk 1–2</span><h3>Load capture</h3><p>Two weeks of real peak-generation traffic recorded to size the new architecture from data, not guesses.</p></div>
+          <div class="step"><span class="step-num">Wk 3–7</span><h3>Parallel ingest</h3><p>New Rust gateway and ClickHouse cluster built and validated alongside the existing pipeline.</p></div>
+          <div class="step"><span class="step-num">Wk 8–10</span><h3>Cutover &amp; right-sizing</h3><p>Traffic moved site by site; cluster tuned down to its real footprint once volume was confirmed stable.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASE NAV -->
+    <section class="section" style="padding-top:0; padding-bottom:0;">
+      <div class="container">
+        <nav class="case-nav" aria-label="More case studies">
+          <a href="case-fernbrook.html"><span class="cn-label">Previous case study</span><span class="cn-title">← Fernbrook Capital</span></a>
+          <a class="next" href="work.html"><span class="cn-label">All case studies</span><span class="cn-title">Back to Work →</span></a>
+        </nav>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="container" data-reveal>
+        <h2 class="h2">Your project, the <em class="accent-serif">next</em> case study.</h2>
+        <p>We take on eight new engagements a year. A 30-minute call with an engineer will tell you if one should be yours.</p>
+        <div class="hero-cta"><a class="btn btn-primary btn-lg" href="index.html#contact">Start a project</a><a class="btn btn-ghost btn-lg" href="about.html">Meet the team</a></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-root"></div>
+  <script src="js/footer.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>
