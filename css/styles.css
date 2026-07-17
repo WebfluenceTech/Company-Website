@@ -558,6 +558,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 /* ---------- sections ---------- */
 
+section[id] { scroll-margin-top: 84px; }
 .section { padding: 110px 0; }
 .section-alt {
   background: var(--bg-raise);
@@ -873,6 +874,21 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   gap: 6px;
   margin-top: 20px;
 }
+.case-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--acc-2);
+  transition: gap 0.18s var(--ease), color 0.18s ease;
+}
+.case-link svg { transition: transform 0.18s var(--ease); }
+.case-link:hover { color: var(--acc); gap: 9px; }
+.case-link:hover svg { transform: translateX(2px); }
 .case-stack span {
   font-family: var(--font-mono);
   font-size: 0.7rem;
