@@ -197,7 +197,8 @@
         pts.push({
           x: Math.random() * W, y: Math.random() * H,
           vx: (Math.random() - 0.5) * 0.22, vy: (Math.random() - 0.5) * 0.22,
-          r: Math.random() * 1.4 + 0.5
+          r: Math.random() * 1.4 + 0.5,
+          c: Math.random() < 0.6 ? "rgba(120, 205, 255, 0.5)" : "rgba(167, 139, 250, 0.5)"
         });
       }
     };
@@ -229,7 +230,7 @@
         }
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255, 150, 95, 0.5)";
+        ctx.fillStyle = p.c;
         ctx.fill();
         for (var j = i + 1; j < pts.length; j++) {
           var q = pts[j];
@@ -240,7 +241,7 @@
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = "rgba(255, 130, 75, " + a.toFixed(3) + ")";
+            ctx.strokeStyle = "rgba(100, 190, 255, " + a.toFixed(3) + ")";
             ctx.lineWidth = 1;
             ctx.stroke();
           }

@@ -29,8 +29,8 @@ Or open `index.html` directly, or deploy the folder to any static host
 
 | Token | Value |
 |---|---|
-| Canvas | `#0b0c0f` warm near-black, layered surfaces, 1px hairline borders |
-| Accent | Ember gradient `#ff7a45 → #ffb864`, used surgically |
+| Canvas | `#05080f` deep-space navy, layered surfaces, 1px hairline borders |
+| Accent | Aurora gradient `#4cd6ff → #a78bfa`, used surgically |
 | Type | Inter + Instrument Serif italic accent words |
 | Motion | 150–700ms ease-out reveals, confirm-not-decorate |
 
