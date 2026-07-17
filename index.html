@@ -18,6 +18,7 @@
 <body>
 
   <a class="skip-link" href="#main">Skip to content</a>
+  <div class="progress" id="progress" aria-hidden="true"></div>
 
   <!-- ======================= NAV ======================= -->
   <header class="nav" id="nav">
@@ -64,14 +65,17 @@
     <!-- ======================= HERO ======================= -->
     <section class="hero" id="top">
       <div class="hero-bg" aria-hidden="true"></div>
+      <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
       <div class="container">
-        <div class="hero-copy" data-reveal>
+        <div class="hero-copy hero-stage">
           <div class="pill">
             <span class="pill-dot" aria-hidden="true"></span>
             Now partnering with Series A–D product teams
           </div>
           <h1 class="display">
-            Software your company can <em class="accent-serif">bet</em> on.
+            We engineer<br>
+            <span class="rotator-wrap"><em class="accent-serif" id="rotator">AI products</em><span class="caret" aria-hidden="true"></span></span><br>
+            you can bet on.
           </h1>
           <p class="hero-sub">
             Meridian is a senior engineering firm in San&nbsp;Francisco and New&nbsp;York.
@@ -110,7 +114,7 @@
                 <div class="console-metrics">
                   <div class="metric">
                     <span class="metric-label">Requests / min</span>
-                    <span class="metric-value">412,806</span>
+                    <span class="metric-value" id="mReq">412,806</span>
                     <span class="metric-delta up">▲ 12.4%</span>
                     <svg class="spark" viewBox="0 0 100 28" preserveAspectRatio="none" aria-hidden="true">
                       <path d="M0 22 L10 20 L20 21 L30 16 L40 17 L50 12 L60 14 L70 9 L80 10 L90 5 L100 6" />
@@ -118,7 +122,7 @@
                   </div>
                   <div class="metric">
                     <span class="metric-label">p99 latency</span>
-                    <span class="metric-value">84 ms</span>
+                    <span class="metric-value" id="mLat">84 ms</span>
                     <span class="metric-delta up">▼ 31 ms</span>
                     <svg class="spark" viewBox="0 0 100 28" preserveAspectRatio="none" aria-hidden="true">
                       <path d="M0 8 L10 10 L20 7 L30 12 L40 11 L50 15 L60 13 L70 18 L80 17 L90 21 L100 20" />
@@ -134,11 +138,13 @@
                   </div>
                 </div>
                 <div class="console-feed">
-                  <div class="feed-title">Agent activity</div>
+                  <div class="feed-title">Agent activity <span class="feed-live"><span class="dot ok pulse"></span>streaming</span></div>
+                  <div id="feedRows">
                   <div class="feed-row"><span class="dot ok"></span><span class="feed-name">claims-triage</span><span class="feed-desc">Resolved 1,208 documents · 99.1% confidence</span><span class="feed-time">2m</span></div>
                   <div class="feed-row"><span class="dot ok"></span><span class="feed-name">dispatch-optimizer</span><span class="feed-desc">Re-routed 340 shipments · saved 6.2h</span><span class="feed-time">9m</span></div>
                   <div class="feed-row"><span class="dot warn"></span><span class="feed-name">ledger-sync</span><span class="feed-desc">Retrying upstream (attempt 2/5)</span><span class="feed-time">14m</span></div>
                   <div class="feed-row"><span class="dot ok"></span><span class="feed-name">churn-signals</span><span class="feed-desc">Weekly cohort model retrained · AUC 0.94</span><span class="feed-time">31m</span></div>
+                  </div>
                 </div>
                 <div class="console-deploy">
                   <span class="dot ok pulse"></span>
@@ -149,6 +155,30 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ======================= TECH MARQUEE ======================= -->
+    <section class="marquee" aria-label="Technology stack">
+      <div class="marquee-track" id="marqueeTrack">
+        <span class="mq-item">TypeScript</span><span class="mq-sep">✦</span>
+        <span class="mq-item">React</span><span class="mq-sep">✦</span>
+        <span class="mq-item">Next.js</span><span class="mq-sep">✦</span>
+        <span class="mq-item">Node.js</span><span class="mq-sep">✦</span>
+        <span class="mq-item">Python</span><span class="mq-sep">✦</span>
+        <span class="mq-item">PyTorch</span><span class="mq-sep">✦</span>
+        <span class="mq-item">PostgreSQL</span><span class="mq-sep">✦</span>
+        <span class="mq-item">Kubernetes</span><span class="mq-sep">✦</span>
+        <span class="mq-item">AWS</span><span class="mq-sep">✦</span>
+        <span class="mq-item">Terraform</span><span class="mq-sep">✦</span>
+        <span class="mq-item">Go</span><span class="mq-sep">✦</span>
+        <span class="mq-item">Rust</span><span class="mq-sep">✦</span>
+        <span class="mq-item">Flutter</span><span class="mq-sep">✦</span>
+        <span class="mq-item">Kafka</span><span class="mq-sep">✦</span>
+        <span class="mq-item">Temporal</span><span class="mq-sep">✦</span>
+        <span class="mq-item">Redis</span><span class="mq-sep">✦</span>
+        <span class="mq-item">GraphQL</span><span class="mq-sep">✦</span>
+        <span class="mq-item">Docker</span><span class="mq-sep">✦</span>
       </div>
     </section>
 
@@ -400,8 +430,8 @@
           <h2 class="h2">Outcomes, with <em class="accent-serif">receipts</em>.</h2>
           <p class="section-sub">Three engagements, three before-and-afters. Every number below was a line in a board deck.</p>
         </div>
-        <div class="cases" data-reveal>
-          <article class="case">
+        <div class="cases">
+          <article class="case tilt" data-reveal data-reveal-delay="0">
             <div class="case-top">
               <span class="case-brand lm-1">Tideway</span>
               <span class="case-tag">Logistics · Platform + AI</span>
@@ -411,7 +441,7 @@
             <p class="case-desc">Rebuilt a 14-year-old dispatch system into a realtime platform with an AI routing layer. 340 shipments re-routed daily, 6.2 hours saved per dispatcher.</p>
             <div class="case-stack"><span>Go</span><span>React</span><span>Postgres</span><span>Kafka</span></div>
           </article>
-          <article class="case">
+          <article class="case tilt" data-reveal data-reveal-delay="110">
             <div class="case-top">
               <span class="case-brand lm-2">FERNBROOK</span>
               <span class="case-tag">Fintech · Document AI</span>
@@ -421,7 +451,7 @@
             <p class="case-desc">Document-intelligence pipeline for private-credit diligence: extraction, cross-referencing, and drafting with a full audit trail. 99.1% extraction accuracy on live deals.</p>
             <div class="case-stack"><span>Python</span><span>pgvector</span><span>Next.js</span><span>Temporal</span></div>
           </article>
-          <article class="case">
+          <article class="case tilt" data-reveal data-reveal-delay="220">
             <div class="case-top">
               <span class="case-brand lm-4">Bluepeak</span>
               <span class="case-tag">Energy · Cloud &amp; Telemetry</span>
@@ -458,23 +488,23 @@
           <h2 class="h2">Four phases. No <em class="accent-serif">surprises</em>.</h2>
           <p class="section-sub">A fixed operating rhythm, a demo every Friday, and a written decision log from kickoff to handover.</p>
         </div>
-        <div class="steps" data-reveal>
-          <div class="step">
+        <div class="steps">
+          <div class="step" data-reveal data-reveal-delay="0">
             <span class="step-num">01</span>
             <h3>Diagnose</h3>
             <p>Two weeks embedded with your team. We map the domain, the data, and the risk — and tell you honestly if you don't need us.</p>
           </div>
-          <div class="step">
+          <div class="step" data-reveal data-reveal-delay="90">
             <span class="step-num">02</span>
             <h3>Design</h3>
             <p>Architecture and interface designed together, prototyped in code. You review working software, not slideware.</p>
           </div>
-          <div class="step">
+          <div class="step" data-reveal data-reveal-delay="180">
             <span class="step-num">03</span>
             <h3>Build</h3>
             <p>Senior engineers only — no bait-and-switch staffing. Weekly demos, trunk-based delivery, performance budgets in CI.</p>
           </div>
-          <div class="step">
+          <div class="step" data-reveal data-reveal-delay="270">
             <span class="step-num">04</span>
             <h3>Run &amp; hand over</h3>
             <p>We operate what we ship, then transfer it with docs, runbooks, and pairing until your team is faster in the codebase than we are.</p>
@@ -486,16 +516,16 @@
     <!-- ======================= TESTIMONIALS ======================= -->
     <section class="section section-alt" aria-label="Testimonials">
       <div class="container">
-        <div class="quotes" data-reveal>
-          <figure class="quote">
+        <div class="quotes">
+          <figure class="quote" data-reveal data-reveal-delay="0">
             <blockquote>“They argued us out of half the roadmap and shipped the half that mattered. Our board thinks we tripled headcount.”</blockquote>
             <figcaption><strong>Dana Whitfield</strong><span>COO, Tideway</span></figcaption>
           </figure>
-          <figure class="quote quote-featured">
+          <figure class="quote quote-featured" data-reveal data-reveal-delay="110">
             <blockquote>“The first vendor whose code our staff engineers didn't want to rewrite. We ended up adopting their standards internally.”</blockquote>
             <figcaption><strong>Priya Raman</strong><span>CTO, Fernbrook Capital</span></figcaption>
           </figure>
-          <figure class="quote">
+          <figure class="quote" data-reveal data-reveal-delay="220">
             <blockquote>“Meridian treats a deadline like an SLO. Nine months, zero slipped milestones, and the platform hasn't paged us once.”</blockquote>
             <figcaption><strong>Marcus Oyelaran</strong><span>VP Engineering, Bluepeak Energy</span></figcaption>
           </figure>

@@ -119,3 +119,203 @@
   var year = document.getElementById("year");
   if (year) year.textContent = String(new Date().getFullYear());
 })();
+
+/* ============================================================
+   Motion upgrade — particles, typewriter, marquee, tilt,
+   live console, scroll progress. Skipped under reduced motion.
+   ============================================================ */
+
+(function () {
+  "use strict";
+
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- scroll progress ---------- */
+  var progress = document.getElementById("progress");
+  if (progress && !reducedMotion) {
+    var updateProgress = function () {
+      var h = document.documentElement;
+      var max = h.scrollHeight - h.clientHeight;
+      progress.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + "%";
+    };
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    updateProgress();
+  }
+
+  /* ---------- marquee: duplicate track for seamless loop ---------- */
+  var track = document.getElementById("marqueeTrack");
+  if (track && !reducedMotion) {
+    track.innerHTML += track.innerHTML;
+  }
+
+  /* ---------- typewriter rotator ---------- */
+  var rotator = document.getElementById("rotator");
+  if (rotator) {
+    var words = ["AI products", "SaaS platforms", "cloud systems", "mobile apps", "automations"];
+    if (reducedMotion) {
+      rotator.textContent = words[0];
+    } else {
+      var wi = 0, ci = words[0].length, deleting = false;
+      var typeTick = function () {
+        var word = words[wi];
+        if (deleting) {
+          ci--;
+          if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; }
+        } else {
+          ci++;
+          if (ci === word.length) {
+            deleting = true;
+            rotator.textContent = word;
+            setTimeout(typeTick, 2100);
+            return;
+          }
+        }
+        rotator.textContent = words[deleting || ci > 0 ? wi : wi].slice(0, ci);
+        setTimeout(typeTick, deleting ? 45 : 85);
+      };
+      setTimeout(typeTick, 2100);
+    }
+  }
+
+  /* ---------- hero particle constellation ---------- */
+  var canvas = document.getElementById("heroCanvas");
+  if (canvas && !reducedMotion && window.matchMedia("(min-width: 720px)").matches) {
+    var ctx = canvas.getContext("2d");
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var W = 0, H = 0, pts = [], mouse = { x: -9999, y: -9999 };
+    var running = true;
+
+    var resize = function () {
+      var rect = canvas.parentElement.getBoundingClientRect();
+      W = rect.width; H = rect.height;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      canvas.style.width = W + "px"; canvas.style.height = H + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var n = Math.min(90, Math.floor(W / 16));
+      pts = [];
+      for (var i = 0; i < n; i++) {
+        pts.push({
+          x: Math.random() * W, y: Math.random() * H,
+          vx: (Math.random() - 0.5) * 0.22, vy: (Math.random() - 0.5) * 0.22,
+          r: Math.random() * 1.4 + 0.5
+        });
+      }
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    canvas.parentElement.addEventListener("mousemove", function (e) {
+      var rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left; mouse.y = e.clientY - rect.top;
+    });
+    canvas.parentElement.addEventListener("mouseleave", function () {
+      mouse.x = -9999; mouse.y = -9999;
+    });
+
+    var LINK = 110;
+    var draw = function () {
+      if (!running) return;
+      ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < pts.length; i++) {
+        var p = pts[i];
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (p.y < 0 || p.y > H) p.vy *= -1;
+        // gentle pull toward cursor
+        var mdx = mouse.x - p.x, mdy = mouse.y - p.y;
+        var md = Math.sqrt(mdx * mdx + mdy * mdy);
+        if (md < 160 && md > 0.001) {
+          p.x += (mdx / md) * 0.18; p.y += (mdy / md) * 0.18;
+        }
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255, 150, 95, 0.5)";
+        ctx.fill();
+        for (var j = i + 1; j < pts.length; j++) {
+          var q = pts[j];
+          var dx = p.x - q.x, dy = p.y - q.y;
+          var d2 = dx * dx + dy * dy;
+          if (d2 < LINK * LINK) {
+            var a = (1 - Math.sqrt(d2) / LINK) * 0.16;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = "rgba(255, 130, 75, " + a.toFixed(3) + ")";
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    };
+    // only animate while hero is on screen
+    new IntersectionObserver(function (entries) {
+      var visible = entries[0].isIntersecting;
+      if (visible && !running) { running = true; draw(); }
+      else if (!visible) { running = false; }
+    }).observe(canvas.parentElement);
+    draw();
+  }
+
+  /* ---------- live console: ticking metrics + streaming feed ---------- */
+  var mReq = document.getElementById("mReq");
+  var mLat = document.getElementById("mLat");
+  var feed = document.getElementById("feedRows");
+  if (!reducedMotion && mReq && mLat) {
+    var req = 412806, lat = 84;
+    setInterval(function () {
+      req = Math.max(380000, Math.min(450000, req + Math.round((Math.random() - 0.48) * 4200)));
+      lat = Math.max(61, Math.min(118, lat + Math.round((Math.random() - 0.5) * 7)));
+      mReq.textContent = req.toLocaleString("en-US");
+      mLat.textContent = lat + " ms";
+      [mReq, mLat].forEach(function (el) {
+        el.classList.remove("is-tick");
+        void el.offsetWidth;
+        el.classList.add("is-tick");
+      });
+    }, 2600);
+  }
+  if (!reducedMotion && feed) {
+    var pool = [
+      ['ok', 'claims-triage', 'Resolved 1,214 documents · 99.2% confidence'],
+      ['ok', 'dispatch-optimizer', 'Re-routed 287 shipments · saved 5.1h'],
+      ['ok', 'churn-signals', 'Cohort scored · 312 accounts flagged'],
+      ['warn', 'ledger-sync', 'Retrying upstream (attempt 3/5)'],
+      ['ok', 'invoice-parser', 'Extracted 96 line items · 0 escalations'],
+      ['ok', 'fleet-telemetry', 'Anomaly scan clean · 4.1M events'],
+      ['ok', 'kyc-screening', 'Batch cleared · 100% audit coverage'],
+      ['ok', 'ledger-sync', 'Upstream recovered · queue drained']
+    ];
+    var pi = 0;
+    setInterval(function () {
+      var item = pool[pi % pool.length]; pi++;
+      var row = document.createElement("div");
+      row.className = "feed-row is-new";
+      row.innerHTML = '<span class="dot ' + item[0] + '"></span>' +
+        '<span class="feed-name">' + item[1] + '</span>' +
+        '<span class="feed-desc">' + item[2] + '</span>' +
+        '<span class="feed-time">now</span>';
+      feed.insertBefore(row, feed.firstChild);
+      var rows = feed.querySelectorAll(".feed-row");
+      if (rows.length > 4) feed.removeChild(rows[rows.length - 1]);
+    }, 3400);
+  }
+
+  /* ---------- 3D tilt on case cards ---------- */
+  var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (!reducedMotion && fine) {
+    Array.prototype.forEach.call(document.querySelectorAll(".tilt"), function (card) {
+      card.addEventListener("mousemove", function (e) {
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform =
+          "perspective(900px) rotateX(" + (-py * 6).toFixed(2) + "deg) rotateY(" +
+          (px * 8).toFixed(2) + "deg) translateY(-4px)";
+      });
+      card.addEventListener("mouseleave", function () {
+        card.style.transform = "";
+      });
+    });
+  }
+})();

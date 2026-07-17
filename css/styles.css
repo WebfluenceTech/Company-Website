@@ -1304,3 +1304,137 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 
 .work-more { margin-top: 40px; text-align: center; }
+
+/* ============================================================
+   Motion upgrade — progress bar, hero canvas, staged entrance,
+   typewriter rotator, tech marquee, tilt, live feed
+   ============================================================ */
+
+/* scroll progress */
+.progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0;
+  z-index: 60;
+  background: var(--ember-grad);
+  box-shadow: 0 0 12px rgba(255, 122, 69, 0.7);
+}
+
+/* hero particle canvas */
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.9;
+  mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+}
+
+/* staged hero entrance */
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: none; }
+}
+.hero-stage > * { animation: riseIn 0.85s var(--ease) both; }
+.hero-stage .pill { animation-delay: 0.05s; }
+.hero-stage .display { animation-delay: 0.18s; }
+.hero-stage .hero-sub { animation-delay: 0.34s; }
+.hero-stage .hero-cta { animation-delay: 0.48s; }
+.hero-stage .hero-meta { animation-delay: 0.6s; }
+
+/* typewriter rotator */
+.rotator-wrap { white-space: nowrap; }
+.caret {
+  display: inline-block;
+  width: 3px;
+  height: 0.82em;
+  margin-left: 0.08em;
+  vertical-align: -0.06em;
+  background: var(--ember);
+  box-shadow: 0 0 14px rgba(255, 122, 69, 0.8);
+  animation: blink 1.1s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* gradient shimmer on serif accents */
+.accent-serif {
+  background-size: 200% 100%;
+  animation: shimmer 7s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* tech marquee */
+.marquee {
+  position: relative;
+  overflow: hidden;
+  padding: 18px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.015);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  width: max-content;
+  animation: marquee 36s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+.mq-item {
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  color: var(--text-3);
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+.mq-item:hover { color: var(--ember-2); }
+.mq-sep { color: rgba(255, 122, 69, 0.4); font-size: 0.6rem; }
+
+/* live feed chip */
+.feed-live {
+  float: right;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--ok);
+}
+@keyframes feedIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: none; }
+}
+.feed-row.is-new { animation: feedIn 0.5s var(--ease) both; }
+
+/* tilt cards */
+.tilt {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.tilt .case-metric { transform: translateZ(24px); }
+
+/* metric value tick */
+@keyframes tickFlash { from { color: var(--ember-2); } }
+.metric-value.is-tick { animation: tickFlash 0.6s ease-out; }
+
+/* reduced motion: kill all of it */
+@media (prefers-reduced-motion: reduce) {
+  .hero-stage > * { animation: none; }
+  .caret, .accent-serif { animation: none; }
+  .marquee-track { animation: none; }
+  .marquee { mask-image: none; -webkit-mask-image: none; overflow-x: auto; }
+  .feed-row.is-new { animation: none; }
+  .progress { display: none; }
+  .hero-canvas { display: none; }
+}
+
+@media (max-width: 860px) {
+  .rotator-wrap { white-space: normal; }
+}
