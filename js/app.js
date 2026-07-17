@@ -320,3 +320,53 @@
     });
   }
 })();
+
+/* ============================================================
+   Contact brief form — budget chips + mailto submit
+   ============================================================ */
+
+(function () {
+  "use strict";
+
+  var form = document.getElementById("briefForm");
+  if (!form) return;
+
+  var chips = Array.prototype.slice.call(document.querySelectorAll("#budgetChips .chip"));
+  var selectedBudget = "";
+  chips.forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      var isSelected = chip.classList.contains("is-selected");
+      chips.forEach(function (c) {
+        c.classList.remove("is-selected");
+        c.setAttribute("aria-checked", "false");
+      });
+      if (!isSelected) {
+        chip.classList.add("is-selected");
+        chip.setAttribute("aria-checked", "true");
+        selectedBudget = chip.textContent.trim();
+      } else {
+        selectedBudget = "";
+      }
+    });
+  });
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = document.getElementById("bfName").value.trim();
+    var email = document.getElementById("bfEmail").value.trim();
+    var company = document.getElementById("bfCompany").value.trim();
+    var msg = document.getElementById("bfMsg").value.trim();
+    var body =
+      "Name: " + name + "\n" +
+      "Email: " + email + "\n" +
+      (company ? "Company: " + company + "\n" : "") +
+      (selectedBudget ? "Budget: " + selectedBudget + " (USD)\n" : "") +
+      "\n" + msg;
+    var href = "mailto:hello@meridian.engineering" +
+      "?subject=" + encodeURIComponent("Project brief — " + (company || name)) +
+      "&body=" + encodeURIComponent(body);
+    window.location.href = href;
+    var status = document.getElementById("formStatus");
+    if (status) status.classList.add("is-shown");
+  });
+})();

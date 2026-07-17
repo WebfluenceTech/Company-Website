@@ -18,13 +18,13 @@
           '<p class="footer-tag">Senior software engineering.<br>San Francisco · New York.</p>' +
           '<p class="footer-status"><span class="dot ok pulse"></span>All systems operational</p>' +
         '</div>' +
-        '<nav class="footer-col" aria-label="Capabilities"><h4>Capabilities</h4>' +
-          '<a href="index.html#capabilities">AI &amp; Machine Learning</a>' +
-          '<a href="index.html#capabilities">SaaS Products</a>' +
-          '<a href="index.html#capabilities">Enterprise Platforms</a>' +
-          '<a href="index.html#capabilities">Web &amp; Mobile</a>' +
-          '<a href="index.html#capabilities">Cloud &amp; DevOps</a>' +
-          '<a href="index.html#capabilities">Automation</a></nav>' +
+        '<nav class="footer-col" aria-label="Services"><h4>Services</h4>' +
+          '<a href="service-ai.html">AI &amp; Machine Learning</a>' +
+          '<a href="service-saas.html">SaaS Products</a>' +
+          '<a href="service-enterprise.html">Enterprise Platforms</a>' +
+          '<a href="service-mobile.html">Web &amp; Mobile</a>' +
+          '<a href="service-cloud.html">Cloud &amp; DevOps</a>' +
+          '<a href="service-automation.html">Automation</a></nav>' +
         '<nav class="footer-col" aria-label="Company"><h4>Company</h4>' +
           '<a href="about.html">About</a>' +
           '<a href="index.html#process">How we work</a>' +

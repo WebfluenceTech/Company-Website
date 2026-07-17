@@ -1531,3 +1531,203 @@ section[id] { scroll-margin-top: 84px; }
   .case-nav { flex-direction: column; }
   .case-nav a, .case-nav a.next { max-width: 100%; align-items: flex-start; text-align: left; }
 }
+
+/* ============================================================
+   Service pages — pricing tiers (USD)
+   ============================================================ */
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: stretch;
+}
+.price-card {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-raise);
+  transition: border-color 0.25s ease, transform 0.25s var(--ease), box-shadow 0.25s ease;
+}
+.price-card:hover { transform: translateY(-4px); border-color: rgba(110, 190, 255, 0.3); }
+.price-card.featured {
+  border-color: rgba(124, 155, 255, 0.5);
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(76, 214, 255, 0.08), transparent 70%),
+    var(--bg-raise);
+  box-shadow: 0 24px 60px -30px rgba(76, 214, 255, 0.35);
+}
+.price-tier {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.price-badge {
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  border-radius: 999px;
+  color: #041018;
+  background: var(--acc-grad);
+}
+.price-num {
+  margin-top: 18px;
+  font-size: 2.4rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  background: var(--acc-grad);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.price-per { display: block; margin-top: 6px; font-size: 0.84rem; color: var(--text-3); }
+.price-desc { margin-top: 16px; font-size: 0.92rem; color: var(--text-2); }
+.price-feats { margin-top: 20px; display: grid; gap: 10px; flex: 1; }
+.price-feats li {
+  position: relative;
+  padding-left: 26px;
+  font-size: 0.88rem;
+  color: var(--text-2);
+}
+.price-feats li::before {
+  content: "";
+  position: absolute; left: 0; top: 4px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: linear-gradient(120deg, rgba(76,214,255,.22), rgba(167,139,250,.22));
+  border: 1px solid rgba(110, 190, 255, 0.5);
+}
+.price-feats li::after {
+  content: "";
+  position: absolute; left: 4px; top: 8px;
+  width: 6.5px; height: 3.5px;
+  border-left: 1.5px solid var(--acc);
+  border-bottom: 1.5px solid var(--acc);
+  transform: rotate(-48deg);
+}
+.price-card .btn { margin-top: 24px; justify-content: center; }
+.pricing-note { margin-top: 22px; font-size: 0.84rem; color: var(--text-3); }
+
+/* ============================================================
+   Contact — split layout (copy + info cards | brief form)
+   ============================================================ */
+
+.contact-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 56px;
+  align-items: start;
+}
+.contact-copy .h2 { margin-top: 0; }
+.contact-copy > p {
+  margin-top: 18px;
+  max-width: 440px;
+  color: var(--text-2);
+  font-size: 1.02rem;
+}
+.contact-copy .btn { margin-top: 26px; }
+.contact-cards { margin-top: 34px; display: grid; gap: 12px; }
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-raise);
+  transition: border-color 0.2s ease, transform 0.2s var(--ease);
+}
+.contact-card:hover { border-color: rgba(110, 190, 255, 0.3); transform: translateX(3px); }
+.contact-ico {
+  flex-shrink: 0;
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  border-radius: 12px;
+  border: 1px solid var(--border-strong);
+  background: rgba(76, 214, 255, 0.06);
+  color: var(--acc);
+}
+.contact-card span {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.contact-card strong { font-size: 0.98rem; font-weight: 600; color: var(--text); }
+
+.form-card {
+  padding: 30px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, #0f1522, #080c15);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.05) inset, 0 32px 70px -36px rgba(0, 0, 0, 0.8);
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+.form-field label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.form-field input,
+.form-field textarea {
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--text);
+  padding: 12px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-field input::placeholder,
+.form-field textarea::placeholder { color: var(--text-3); }
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: rgba(76, 214, 255, 0.55);
+  box-shadow: 0 0 0 3px rgba(76, 214, 255, 0.14);
+}
+.form-field textarea { min-height: 120px; resize: vertical; }
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  padding: 8px 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--text-2);
+  background: rgba(255, 255, 255, 0.02);
+  transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+.chip:hover { border-color: rgba(255, 255, 255, 0.3); color: var(--text); }
+.chip.is-selected {
+  border-color: transparent;
+  background: var(--acc-grad);
+  color: #041018;
+  font-weight: 600;
+}
+.form-card .btn-primary { width: 100%; justify-content: center; margin-top: 6px; }
+.form-note { margin-top: 14px; text-align: center; font-size: 0.8rem; color: var(--text-3); }
+.form-status { margin-top: 12px; text-align: center; font-size: 0.86rem; color: var(--ok); display: none; }
+.form-status.is-shown { display: block; }
+
+@media (max-width: 1020px) {
+  .pricing-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 560px) {
+  .form-row { grid-template-columns: 1fr; }
+}
