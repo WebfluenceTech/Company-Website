@@ -78,3 +78,20 @@ under prefers-reduced-motion.
 baseline scored 59 anti-patterns. This system exists to score near zero:
 no gradient text, no dark glow, no cyan-on-dark, no sub-AA contrast, no
 nested cards, varied section kickers, no layout-property transitions.
+
+## Detect results (final)
+
+Aurora baseline: 59 anti-patterns. This branch: 6, all verified false
+positives of the static engine, with browser-computed proof:
+
+- 4 × low-contrast "#565d6b on #181a1f": the engine reads a parent's *text*
+  color (`.workcard-big`, `.node`) as the background of its `small` child.
+  A Playwright pass computing real ancestor backgrounds finds 0 sub-AA text
+  nodes across all 12 pages.
+- 2 × flat-type-hierarchy: the engine cannot evaluate `clamp()`; rendered
+  scale ratios are 4.9:1 to 6.9:1 per page (browser-measured).
+
+Every genuine finding was fixed: side-tab borders, gradient text, dark glow,
+cyan-on-dark, sub-12px text, uppercase body runs, skipped headings, nested
+cards, decorative numbering, cramped plate padding, overflow clipping,
+overused faces.

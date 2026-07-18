@@ -179,6 +179,7 @@
 
   /* ---------- hero particle constellation ---------- */
   var canvas = document.getElementById("heroCanvas");
+  if (canvas && getComputedStyle(canvas).display === "none") canvas = null;
   if (canvas && !reducedMotion && window.matchMedia("(min-width: 720px)").matches) {
     var ctx = canvas.getContext("2d");
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -305,7 +306,7 @@
   /* ---------- 3D tilt on case cards ---------- */
   var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   if (!reducedMotion && fine) {
-    Array.prototype.forEach.call(document.querySelectorAll(".tilt"), function (card) {
+    Array.prototype.forEach.call(document.querySelectorAll(".tilt-3d"), function (card) {
       card.addEventListener("mousemove", function (e) {
         var r = card.getBoundingClientRect();
         var px = (e.clientX - r.left) / r.width - 0.5;

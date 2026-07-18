@@ -11,27 +11,27 @@
         '<div class="footer-brand">' +
           '<a class="brand" href="index.html" aria-label="Meridian home">' +
             '<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">' +
-              '<rect width="32" height="32" rx="8" fill="currentColor" opacity="0.08"/>' +
+              '<rect x="0.5" y="0.5" width="31" height="31" rx="5.5" fill="none" stroke="currentColor" stroke-opacity="0.35"/>' +
               '<path d="M8 23V9l8 9 8-9v14" stroke="url(#mgf)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
-              '<defs><linearGradient id="mgf" x1="8" y1="9" x2="24" y2="23" gradientUnits="userSpaceOnUse"><stop stop-color="#4cd6ff"/><stop offset="1" stop-color="#a78bfa"/></linearGradient></defs>' +
+              '<defs><linearGradient id="mgf" x1="8" y1="9" x2="24" y2="23" gradientUnits="userSpaceOnUse"><stop stop-color="#8fb0ff"/><stop offset="1" stop-color="#8fb0ff"/></linearGradient></defs>' +
             '</svg><span class="brand-name">Meridian</span></a>' +
           '<p class="footer-tag">Senior software engineering.<br>San Francisco · New York.</p>' +
           '<p class="footer-status"><span class="dot ok pulse"></span>All systems operational</p>' +
         '</div>' +
-        '<nav class="footer-col" aria-label="Services"><h4>Services</h4>' +
+        '<nav class="footer-col" aria-label="Services"><h3>Services</h3>' +
           '<a href="service-ai.html">AI &amp; Machine Learning</a>' +
           '<a href="service-saas.html">SaaS Products</a>' +
           '<a href="service-enterprise.html">Enterprise Platforms</a>' +
           '<a href="service-mobile.html">Web &amp; Mobile</a>' +
           '<a href="service-cloud.html">Cloud &amp; DevOps</a>' +
           '<a href="service-automation.html">Automation</a></nav>' +
-        '<nav class="footer-col" aria-label="Company"><h4>Company</h4>' +
+        '<nav class="footer-col" aria-label="Company"><h3>Company</h3>' +
           '<a href="about.html">About</a>' +
           '<a href="index.html#process">How we work</a>' +
           '<a href="work.html">Selected work</a>' +
           '<a href="about.html#careers">Careers</a>' +
           '<a href="index.html#contact">Contact</a></nav>' +
-        '<nav class="footer-col" aria-label="Resources"><h4>Resources</h4>' +
+        '<nav class="footer-col" aria-label="Resources"><h3>Resources</h3>' +
           '<a href="index.html#platform">Engineering standards</a>' +
           '<a href="work.html">Case studies</a>' +
           '<a href="index.html#contact">Start a project</a>' +
