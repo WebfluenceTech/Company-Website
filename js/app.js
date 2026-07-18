@@ -1,4 +1,4 @@
-/* Meridian — interactions
+/* Meridian. Interactions
    Nav scroll state · mobile menu · accessible tabs ·
    scroll reveals · stat counters. All gated behind
    prefers-reduced-motion where motion is involved. */
@@ -121,7 +121,7 @@
 })();
 
 /* ============================================================
-   Motion upgrade — particles, typewriter, marquee, tilt,
+   Motion upgrade. Particles, typewriter, marquee, tilt,
    live console, scroll progress. Skipped under reduced motion.
    ============================================================ */
 
@@ -322,7 +322,7 @@
 })();
 
 /* ============================================================
-   Contact brief form — budget chips + mailto submit
+   Contact brief form. Budget chips + mailto submit
    ============================================================ */
 
 (function () {
@@ -363,7 +363,7 @@
       (selectedBudget ? "Budget: " + selectedBudget + " (USD)\n" : "") +
       "\n" + msg;
     var href = "mailto:hello@meridian.engineering" +
-      "?subject=" + encodeURIComponent("Project brief — " + (company || name)) +
+      "?subject=" + encodeURIComponent("Project brief from " + (company || name)) +
       "&body=" + encodeURIComponent(body);
     window.location.href = href;
     var status = document.getElementById("formStatus");
@@ -372,7 +372,7 @@
 })();
 
 /* ============================================================
-   Scrollspy — highlight the nav link for the section in view
+   Scrollspy. Highlight the nav link for the section in view
    (homepage only; sections map to their hash nav links)
    ============================================================ */
 

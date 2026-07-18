@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bluepeak Energy: Telemetry for a Solar Fleet That Tripled — Meridian</title>
-  <meta name="description" content="How Meridian rebuilt Bluepeak Energy's telemetry pipeline to absorb 3x the data volume while cutting cloud spend 42% — 4.2M events per minute, 99.99% uptime.">
-  <meta property="og:title" content="Bluepeak Energy: Telemetry for a Solar Fleet That Tripled — Meridian">
+  <title>Bluepeak Energy: Telemetry for a Solar Fleet That Tripled | Meridian</title>
+  <meta name="description" content="How Meridian rebuilt Bluepeak Energy's telemetry pipeline to absorb 3x the data volume while cutting cloud spend 42%. 4.2M events per minute, 99.99% uptime.">
+  <meta property="og:title" content="Bluepeak Energy: Telemetry for a Solar Fleet That Tripled | Meridian">
   <meta property="og:description" content="Cost is a reliability feature. The full case study.">
   <meta name="theme-color" content="#05080f">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2305080f'/%3E%3Cpath d='M8 23V9l8 9 8-9v14' stroke='%234cd6ff' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
@@ -60,7 +60,7 @@
           <p class="crumb"><a href="index.html">Home</a> <span>/</span> <a href="work.html">Work</a> <span>/</span> Bluepeak</p>
           <span class="case-tag">Energy · Cloud &amp; Telemetry</span>
           <h1 style="margin-top:16px;">Telemetry for a solar fleet that tripled while the bill went down</h1>
-          <p>Bluepeak's distributed solar assets were generating more data than their pipeline could hold. Meridian rebuilt ingest, added anomaly detection, and cut cloud spend 42% — while absorbing three times the volume.</p>
+          <p>Bluepeak's distributed solar assets were generating more data than their pipeline could hold. Meridian rebuilt ingest, added anomaly detection, and cut cloud spend 42%. While absorbing three times the volume.</p>
           <div class="cs-meta">
             <div class="cs-meta-item"><span>Client</span><strong>Bluepeak Energy</strong></div>
             <div class="cs-meta-item"><span>Industry</span><strong>Renewable energy</strong></div>
@@ -92,12 +92,12 @@
           <h2 class="h2">A pipeline sized for last year's fleet</h2>
         </div>
         <div class="prose" data-reveal>
-          <p>Bluepeak operates distributed solar assets across a dozen sites, each inverter reporting telemetry every few seconds. When Meridian was engaged, the fleet had tripled in eighteen months and the ingest pipeline — a single-region managed database never designed for this write volume — was falling behind during peak generation hours, the exact moments when catching a failing inverter mattered most.</p>
-          <p>The response to volume growth had been to scale the database vertically, again and again. Cloud spend had grown faster than the fleet. Worse, the lag meant a failing inverter could go undetected for hours — lost generation that showed up as a line item nobody could explain until the monthly report.</p>
+          <p>Bluepeak operates distributed solar assets across a dozen sites, each inverter reporting telemetry every few seconds. When Meridian was engaged, the fleet had tripled in eighteen months and the ingest pipeline. A single-region managed database never designed for this write volume. Was falling behind during peak generation hours, the exact moments when catching a failing inverter mattered most.</p>
+          <p>The response to volume growth had been to scale the database vertically, again and again. Cloud spend had grown faster than the fleet. Worse, the lag meant a failing inverter could go undetected for hours. Lost generation that showed up as a line item nobody could explain until the monthly report.</p>
           <div class="callout">
             <div>
               <strong>The reframe that changed the architecture</strong>
-              <span>Bluepeak came to us asking to fix performance. We told them the real problem was that cost and reliability were fighting each other — and that a correctly-shaped pipeline would fix both at once.</span>
+              <span>Bluepeak came to us asking to fix performance. We told them the real problem was that cost and reliability were fighting each other. And that a correctly-shaped pipeline would fix both at once.</span>
             </div>
           </div>
         </div>
@@ -112,7 +112,7 @@
           <h2 class="h2">What couldn't move during the rebuild</h2>
         </div>
         <ul class="check-list" data-reveal style="max-width:640px;">
-          <li><strong>No data loss during migration.</strong> Historical telemetry feeds regulatory and warranty reporting — years of it, non-negotiable.</li>
+          <li><strong>No data loss during migration.</strong> Historical telemetry feeds regulatory and warranty reporting. Years of it, non-negotiable.</li>
           <li><strong>Operators couldn't be retrained mid-crisis.</strong> The existing Grafana dashboards had to keep working throughout the migration.</li>
           <li><strong>Hardware diversity across sites.</strong> Four inverter vendors, four telemetry formats, inconsistent clock sync.</li>
           <li><strong>Spend reduction was the mandate, not a nice-to-have.</strong> The board had already flagged infrastructure cost as unsustainable.</li>
@@ -159,12 +159,12 @@
           <div class="vignette-copy">
             <p class="eyebrow">Right-sizing</p>
             <h3>The cluster was sized from real load, not habit</h3>
-            <p>Before touching Kubernetes node counts, we captured two weeks of actual peak-generation traffic and load-tested against it. The cluster that resulted was smaller than the one it replaced — because the old one had been sized by incremental panic-scaling, not by data.</p>
+            <p>Before touching Kubernetes node counts, we captured two weeks of actual peak-generation traffic and load-tested against it. The cluster that resulted was smaller than the one it replaced. Because the old one had been sized by incremental panic-scaling, not by data.</p>
             <a class="text-link" href="index.html#contact">See our cost-reduction approach →</a>
           </div>
           <div class="vignette-visual">
             <div class="ops-card" aria-hidden="true">
-              <div class="ops-row"><span>Ingest availability — 90 days</span><strong class="ok-text">99.99%</strong></div>
+              <div class="ops-row"><span>Ingest availability, 90 days</span><strong class="ok-text">99.99%</strong></div>
               <div class="uptime-bars">
                 <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
               </div>
@@ -188,8 +188,8 @@
           <h2 class="h2">One quarter post-migration</h2>
         </div>
         <div class="prose" data-reveal>
-          <p>The new pipeline absorbs three times the write volume of the old one on a smaller, cheaper cluster — cloud spend is down 42% even as the fleet keeps growing. Anomaly detection, built on the same hot-path data, now flags a failing inverter within 11 minutes on average, down from a detection window that used to run into hours.</p>
-          <p>Operators kept their existing Grafana dashboards throughout — the migration was invisible to the people who depend on this data every day, which was the point.</p>
+          <p>The new pipeline absorbs three times the write volume of the old one on a smaller, cheaper cluster. Cloud spend is down 42% even as the fleet keeps growing. Anomaly detection, built on the same hot-path data, now flags a failing inverter within 11 minutes on average, down from a detection window that used to run into hours.</p>
+          <p>Operators kept their existing Grafana dashboards throughout. The migration was invisible to the people who depend on this data every day, which was the point.</p>
         </div>
         <div class="quote quote-featured" data-reveal style="margin-top:32px; max-width:720px;">
           <blockquote>"Meridian treats a deadline like an SLO. Nine months, zero slipped milestones, and the platform hasn't paged us once."</blockquote>
@@ -206,9 +206,9 @@
           <h2 class="h2">10 weeks, three phases</h2>
         </div>
         <div class="steps" data-reveal>
-          <div class="step"><span class="step-num">Wk 1–2</span><h3>Load capture</h3><p>Two weeks of real peak-generation traffic recorded to size the new architecture from data, not guesses.</p></div>
-          <div class="step"><span class="step-num">Wk 3–7</span><h3>Parallel ingest</h3><p>New Rust gateway and ClickHouse cluster built and validated alongside the existing pipeline.</p></div>
-          <div class="step"><span class="step-num">Wk 8–10</span><h3>Cutover &amp; right-sizing</h3><p>Traffic moved site by site; cluster tuned down to its real footprint once volume was confirmed stable.</p></div>
+          <div class="step"><span class="step-num">Wk 1 and 2</span><h3>Load capture</h3><p>Two weeks of real peak-generation traffic recorded to size the new architecture from data, not guesses.</p></div>
+          <div class="step"><span class="step-num">Wk 3 to 7</span><h3>Parallel ingest</h3><p>New Rust gateway and ClickHouse cluster built and validated alongside the existing pipeline.</p></div>
+          <div class="step"><span class="step-num">Wk 8 to 10</span><h3>Cutover &amp; right-sizing</h3><p>Traffic moved site by site; cluster tuned down to its real footprint once volume was confirmed stable.</p></div>
         </div>
       </div>
     </section>

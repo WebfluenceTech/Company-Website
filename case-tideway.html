@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tideway: Replacing a 14-Year-Old Dispatch System — Meridian</title>
+  <title>Tideway: Replacing a 14-Year-Old Dispatch System | Meridian</title>
   <meta name="description" content="How Meridian rebuilt Tideway's dispatch platform into a realtime, AI-routed system without ever taking the fleet offline. +214% dispatch throughput, 0 hours of downtime.">
-  <meta property="og:title" content="Tideway: Replacing a 14-Year-Old Dispatch System — Meridian">
+  <meta property="og:title" content="Tideway: Replacing a 14-Year-Old Dispatch System | Meridian">
   <meta property="og:description" content="A strangler-fig migration, an AI routing layer, and 340 shipments re-routed daily. The full case study.">
   <meta name="theme-color" content="#05080f">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2305080f'/%3E%3Cpath d='M8 23V9l8 9 8-9v14' stroke='%234cd6ff' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
@@ -60,7 +60,7 @@
           <p class="crumb"><a href="index.html">Home</a> <span>/</span> <a href="work.html">Work</a> <span>/</span> Tideway</p>
           <span class="case-tag">Logistics · Platform + AI</span>
           <h1 style="margin-top:16px;">Replacing a 14-year-old dispatch system without stopping the trucks</h1>
-          <p>Tideway ran North American freight on a dispatch monolith older than most of its dispatchers. Meridian rebuilt it as a realtime, AI-routed platform — migrated live, one route type at a time, without a single hour of downtime.</p>
+          <p>Tideway ran North American freight on a dispatch monolith older than most of its dispatchers. Meridian rebuilt it as a realtime, AI-routed platform. Migrated live, one route type at a time, without a single hour of downtime.</p>
           <div class="cs-meta">
             <div class="cs-meta-item"><span>Client</span><strong>Tideway</strong></div>
             <div class="cs-meta-item"><span>Industry</span><strong>Logistics &amp; freight</strong></div>
@@ -92,8 +92,8 @@
           <h2 class="h2">A dispatch board held together by institutional memory</h2>
         </div>
         <div class="prose" data-reveal>
-          <p>Tideway moves freight across 41 states out of a dispatch system first written in 2011 — a Windows desktop app talking to a single Postgres instance, extended for over a decade by whoever was on call. There was no API. Route assignment lived in three dispatchers' heads and a shared spreadsheet nobody else was allowed to touch.</p>
-          <p>It worked, in the way legacy systems work: badly, and only for the people who already knew where the bodies were buried. Growth made it worse. Every new lane Tideway added meant more manual cross-referencing — driver hours-of-service limits, equipment type, customer SLAs — done by hand, under time pressure, at 5 a.m.</p>
+          <p>Tideway moves freight across 41 states out of a dispatch system first written in 2011. A Windows desktop app talking to a single Postgres instance, extended for over a decade by whoever was on call. There was no API. Route assignment lived in three dispatchers' heads and a shared spreadsheet nobody else was allowed to touch.</p>
+          <p>It worked, in the way legacy systems work: badly, and only for the people who already knew where the bodies were buried. Growth made it worse. Every new lane Tideway added meant more manual cross-referencing. Driver hours-of-service limits, equipment type, customer SLAs. Done by hand, under time pressure, at 5 a.m.</p>
           <p>The board had quietly become the company's biggest scaling risk. Three dispatchers, each with years of tribal knowledge, were a single-point-of-failure for a nine-figure logistics operation.</p>
           <div class="callout">
             <div>
@@ -114,7 +114,7 @@
           <p class="section-sub">Four rules shaped every architecture decision on this engagement.</p>
         </div>
         <ul class="check-list" data-reveal style="max-width:640px;">
-          <li><strong>No downtime, ever.</strong> Freight doesn't pause for maintenance windows — the fleet runs three shifts, seven days a week.</li>
+          <li><strong>No downtime, ever.</strong> Freight doesn't pause for maintenance windows. The fleet runs three shifts, seven days a week.</li>
           <li><strong>Dispatchers had to trust it on day one.</strong> A system that overrides an experienced dispatcher's judgment without explanation gets ignored, not adopted.</li>
           <li><strong>Legacy telematics data was inconsistent.</strong> Six GPS vendors, six data formats, none of them clean.</li>
           <li><strong>Union scheduling rules were non-negotiable.</strong> Hours-of-service and seniority rules had to be enforced in code, exactly, with no exceptions the old system's dispatchers used to grant informally.</li>
@@ -128,14 +128,14 @@
         <div class="section-head" data-reveal style="max-width:720px;">
           <p class="eyebrow">The approach</p>
           <h2 class="h2">Strangler-fig migration, not a rewrite</h2>
-          <p class="section-sub">We built the new system alongside the old one and moved traffic a route type at a time — the monolith was decommissioned by attrition, not by a cutover date.</p>
+          <p class="section-sub">We built the new system alongside the old one and moved traffic a route type at a time. The monolith was decommissioned by attrition, not by a cutover date.</p>
         </div>
 
         <div class="vignette" data-reveal>
           <div class="vignette-copy">
-            <p class="eyebrow">Phase 1 — parallel core</p>
+            <p class="eyebrow">Phase 1. Parallel core</p>
             <h3>An event-driven core, running silently in the background</h3>
-            <p>We stood up an event bus fed by the same telematics feeds as the legacy system, normalizing six vendors' GPS formats into one schema. For the first six weeks, the new core did nothing but shadow the old system — computing routes, logging what it would have done, and comparing against what dispatchers actually chose.</p>
+            <p>We stood up an event bus fed by the same telematics feeds as the legacy system, normalizing six vendors' GPS formats into one schema. For the first six weeks, the new core did nothing but shadow the old system. Computing routes, logging what it would have done, and comparing against what dispatchers actually chose.</p>
             <a class="text-link" href="index.html#contact">Talk about a migration →</a>
           </div>
           <div class="vignette-visual">
@@ -159,14 +159,14 @@
 
         <div class="vignette vignette-flip" data-reveal>
           <div class="vignette-copy">
-            <p class="eyebrow">Phase 2 — route by route</p>
+            <p class="eyebrow">Phase 2. Route by route</p>
             <h3>One lane type moved live at a time, behind a flag</h3>
-            <p>Once shadow accuracy held above 96% against dispatcher choices for two straight weeks, we flipped the first route type — regional less-than-truckload — to the new system, for one terminal. Dispatchers kept their old screen open as a safety net for the first three days. It stayed unused.</p>
+            <p>Once shadow accuracy held above 96% against dispatcher choices for two straight weeks, we flipped the first route type. Regional less-than-truckload. To the new system, for one terminal. Dispatchers kept their old screen open as a safety net for the first three days. It stayed unused.</p>
             <a class="text-link" href="index.html#contact">See our migration playbook →</a>
           </div>
           <div class="vignette-visual">
             <div class="ops-card" aria-hidden="true">
-              <div class="ops-row"><span>Cutover — 11 weeks, route by route</span><strong class="ok-text">100%</strong></div>
+              <div class="ops-row"><span>Cutover: 11 weeks, route by route</span><strong class="ok-text">100%</strong></div>
               <div class="uptime-bars">
                 <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
               </div>
@@ -190,7 +190,7 @@
           <h2 class="h2">A solver for the 95% case, a model for the rest</h2>
         </div>
         <div class="prose" data-reveal>
-          <p>Most route assignment is a constraint-satisfaction problem — hours-of-service limits, equipment compatibility, customer delivery windows — and a classical solver (OR-Tools) handles it faster and more predictably than any LLM would. We only reach for a language model at the edges: disambiguating ambiguous free-text notes from customers ("dock closes early on Fridays, call ahead"), and explaining a routing decision back to a dispatcher in plain language when they ask why.</p>
+          <p>Most route assignment is a constraint-satisfaction problem. Hours-of-service limits, equipment compatibility, customer delivery windows. And a classical solver (OR-Tools) handles it faster and more predictably than any LLM would. We only reach for a language model at the edges: disambiguating ambiguous free-text notes from customers ("dock closes early on Fridays, call ahead"), and explaining a routing decision back to a dispatcher in plain language when they ask why.</p>
           <p>That division of labor is deliberate. The system that moves freight worth real money runs on math you can audit; the model only touches the parts where judgment, not computation, is the bottleneck.</p>
         </div>
       </div>
@@ -204,8 +204,8 @@
           <h2 class="h2">Six months post-launch</h2>
         </div>
         <div class="prose" data-reveal>
-          <p>Dispatch throughput — shipments a single dispatcher can manage per shift — is up 214%, largely because the routing solver now handles the constraint-checking that used to be manual cross-referencing. Dispatchers spend their time on exceptions and customer relationships, not spreadsheet lookups.</p>
-          <p>340 shipments are re-routed automatically each day in response to traffic, weather, and driver availability changes — re-routing that simply didn't happen under the old system because no one had time to do it by hand.</p>
+          <p>Dispatch throughput. Shipments a single dispatcher can manage per shift. Is up 214%, largely because the routing solver now handles the constraint-checking that used to be manual cross-referencing. Dispatchers spend their time on exceptions and customer relationships, not spreadsheet lookups.</p>
+          <p>340 shipments are re-routed automatically each day in response to traffic, weather, and driver availability changes. Re-routing that simply didn't happen under the old system because no one had time to do it by hand.</p>
         </div>
         <div class="quote quote-featured" data-reveal style="margin-top:32px; max-width:720px;">
           <blockquote>"They argued us out of half the roadmap and shipped the half that mattered. Our board thinks we tripled headcount."</blockquote>
@@ -222,10 +222,10 @@
           <h2 class="h2">22 weeks, four phases</h2>
         </div>
         <div class="steps" data-reveal>
-          <div class="step"><span class="step-num">Wk 1–4</span><h3>Discovery</h3><p>Embedded with dispatchers, mapped every implicit rule in the legacy workflow.</p></div>
-          <div class="step"><span class="step-num">Wk 5–10</span><h3>Shadow core</h3><p>Event-driven routing core running silently, validated against real dispatcher decisions.</p></div>
-          <div class="step"><span class="step-num">Wk 11–20</span><h3>Route-by-route cutover</h3><p>Each lane type flipped live behind a flag, oldest and highest-risk lanes moved last.</p></div>
-          <div class="step"><span class="step-num">Wk 21–22</span><h3>Legacy decommission</h3><p>Old system left running, unused, for two weeks as a safety net before shutdown.</p></div>
+          <div class="step"><span class="step-num">Wk 1 to 4</span><h3>Discovery</h3><p>Embedded with dispatchers, mapped every implicit rule in the legacy workflow.</p></div>
+          <div class="step"><span class="step-num">Wk 5 to 10</span><h3>Shadow core</h3><p>Event-driven routing core running silently, validated against real dispatcher decisions.</p></div>
+          <div class="step"><span class="step-num">Wk 11 to 20</span><h3>Route-by-route cutover</h3><p>Each lane type flipped live behind a flag, oldest and highest-risk lanes moved last.</p></div>
+          <div class="step"><span class="step-num">Wk 21 and 22</span><h3>Legacy decommission</h3><p>Old system left running, unused, for two weeks as a safety net before shutdown.</p></div>
         </div>
       </div>
     </section>

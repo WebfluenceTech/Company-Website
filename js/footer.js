@@ -1,4 +1,4 @@
-/* Shared footer — injected on subpages to keep markup DRY.
+/* Shared footer. Injected on subpages to keep markup DRY.
    index.html keeps its footer inline (works with JS disabled). */
 (function () {
   "use strict";
@@ -35,11 +35,12 @@
           '<a href="index.html#platform">Engineering standards</a>' +
           '<a href="work.html">Case studies</a>' +
           '<a href="index.html#contact">Start a project</a>' +
-          '<a href="index.html#contact">Press &amp; partnerships</a></nav>' +
+          '<a href="mailto:press@meridian.engineering">Press &amp; partnerships</a>' +
+          '<a href="https://github.com/WebfluenceTech/Company-Website" target="_blank" rel="noopener">View source on GitHub ↗</a></nav>' +
       '</div>' +
       '<div class="footer-bottom">' +
         '<p>© ' + year + ' Meridian Systems, Inc. · 588 Townsend St, San Francisco, CA</p>' +
-        '<p class="footer-disclosure"><sup>*</sup>Meridian is a fictional company — a brand, product &amp; engineering design study. All clients, people, and metrics are invented.</p>' +
+        '<p class="footer-disclosure"><sup>*</sup>Meridian is a fictional company. A brand, product &amp; engineering design study. All clients, people, and metrics are invented.</p>' +
       '</div>' +
     '</div></footer>';
 })();
