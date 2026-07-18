@@ -1810,3 +1810,91 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   .btn-primary::after { display: none; }
 }
+
+/* ============================================================
+   Tech animations — packets, bar growth, spark draw,
+   code stepping, deploy terminal
+   ============================================================ */
+
+/* data packets traveling the pipeline paths (SMIL, injected by JS) */
+.pkt {
+  fill: var(--acc);
+  filter: drop-shadow(0 0 5px rgba(76, 214, 255, 0.9));
+}
+.pkt.v { fill: var(--acc-2); filter: drop-shadow(0 0 5px rgba(167, 139, 250, 0.9)); }
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* uptime bars grow in, staggered (delays set inline by JS) */
+  .uptime-bars span { transform-origin: bottom; }
+  [data-reveal]:not(.is-visible) .uptime-bars span { transform: scaleY(0); }
+  [data-reveal] .uptime-bars span { transition: transform 0.5s var(--ease); }
+
+  /* console sparklines draw themselves */
+  .spark path {
+    stroke-dasharray: 170;
+    stroke-dashoffset: 170;
+    animation: sparkDraw 1.5s var(--ease) 0.4s forwards;
+  }
+  .metric:nth-child(2) .spark path { animation-delay: 0.65s; }
+  .metric:nth-child(3) .spark path { animation-delay: 0.9s; }
+
+  /* code cards: a debugger-style line highlight stepping through */
+  .code { position: relative; }
+  .code::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    top: 18px;
+    height: 1.75em;
+    background: linear-gradient(90deg, rgba(76, 214, 255, 0.08), transparent 75%);
+    border-left: 2px solid rgba(76, 214, 255, 0.55);
+    animation: codeStep 9s steps(1, end) infinite;
+    pointer-events: none;
+  }
+}
+@keyframes sparkDraw { to { stroke-dashoffset: 0; } }
+@keyframes codeStep {
+  0%   { transform: translateY(0); }
+  11%  { transform: translateY(1.75em); }
+  22%  { transform: translateY(3.5em); }
+  33%  { transform: translateY(5.25em); }
+  44%  { transform: translateY(7em); }
+  55%  { transform: translateY(8.75em); }
+  66%  { transform: translateY(10.5em); }
+  77%  { transform: translateY(12.25em); }
+  88%  { transform: translateY(14em); }
+  100% { transform: translateY(0); }
+}
+
+/* deploy terminal */
+.term-card {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, #0f1522, #080c15);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.05) inset, 0 24px 60px -28px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+}
+.term-body {
+  padding: 18px 20px;
+  min-height: 236px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.9;
+  color: var(--text-2);
+}
+.term-body .t-line { display: block; white-space: pre-wrap; }
+.t-cmd { color: var(--text); }
+.t-cmd .t-prompt { color: var(--acc); }
+.t-ok { color: var(--ok); }
+.t-dim { color: var(--text-3); }
+.t-caret {
+  display: inline-block;
+  width: 7px; height: 1em;
+  vertical-align: -0.15em;
+  background: var(--acc);
+  animation: blink 1.1s steps(1) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .t-caret { animation: none; }
+}

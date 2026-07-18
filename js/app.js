@@ -416,3 +416,116 @@
     }, { rootMargin: "-10% 0px -70% 0px" }).observe(hero);
   }
 })();
+
+/* ============================================================
+   Tech animations — packet dots on pipeline canvases,
+   uptime bar stagger, deploy terminal typing loop.
+   All skipped under prefers-reduced-motion.
+   ============================================================ */
+
+(function () {
+  "use strict";
+
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var SVG = "http://www.w3.org/2000/svg";
+
+  /* ---------- data packets along every pipeline path ---------- */
+  if (!reducedMotion) {
+    Array.prototype.forEach.call(document.querySelectorAll(".canvas-lines"), function (svg) {
+      Array.prototype.forEach.call(svg.querySelectorAll("path.flow"), function (path, i) {
+        var dot = document.createElementNS(SVG, "circle");
+        dot.setAttribute("r", "2.6");
+        dot.setAttribute("class", "pkt" + (i % 2 ? " v" : ""));
+        var motion = document.createElementNS(SVG, "animateMotion");
+        motion.setAttribute("dur", (2 + i * 0.35).toFixed(2) + "s");
+        motion.setAttribute("repeatCount", "indefinite");
+        motion.setAttribute("begin", (i * 0.5).toFixed(2) + "s");
+        motion.setAttribute("path", path.getAttribute("d"));
+        dot.appendChild(motion);
+        svg.appendChild(dot);
+      });
+    });
+  }
+
+  /* ---------- uptime bars: stagger delays for grow-in ---------- */
+  if (!reducedMotion) {
+    Array.prototype.forEach.call(document.querySelectorAll(".uptime-bars"), function (bars) {
+      Array.prototype.forEach.call(bars.children, function (bar, i) {
+        bar.style.transitionDelay = (i * 16) + "ms";
+      });
+    });
+  }
+
+  /* ---------- deploy terminal typing loop ---------- */
+  var term = document.querySelector("[data-term]");
+  if (term) {
+    var SCRIPT = [
+      { type: "cmd", text: "mrd deploy atlas --env prod" },
+      { type: "dim", text: "› building image atlas-api:9f2c1d" },
+      { type: "dim", text: "› pushing to registry ............ done" },
+      { type: "dim", text: "› rolling out    6/6 pods healthy" },
+      { type: "ok",  text: "✓ deploy complete in 47s" },
+      { type: "cmd", text: "mrd status" },
+      { type: "ok",  text: "✓ p99 84 ms · error budget 99.98% · all green" }
+    ];
+
+    function lineEl(step, partial) {
+      var el = document.createElement("span");
+      el.className = "t-line " + (step.type === "cmd" ? "t-cmd" : step.type === "ok" ? "t-ok" : "t-dim");
+      if (step.type === "cmd") {
+        el.innerHTML = '<span class="t-prompt">$ </span>';
+        el.appendChild(document.createTextNode(partial !== undefined ? partial : step.text));
+      } else {
+        el.textContent = partial !== undefined ? partial : step.text;
+      }
+      return el;
+    }
+
+    if (reducedMotion) {
+      SCRIPT.forEach(function (step) { term.appendChild(lineEl(step)); });
+    } else {
+      var caret = document.createElement("span");
+      caret.className = "t-caret";
+      var si = 0;
+
+      var runStep = function () {
+        if (si >= SCRIPT.length) {
+          setTimeout(function () {
+            while (term.firstChild) term.removeChild(term.firstChild);
+            si = 0;
+            runStep();
+          }, 3800);
+          return;
+        }
+        var step = SCRIPT[si++];
+        if (step.type === "cmd") {
+          var ci = 0;
+          var el = lineEl(step, "");
+          term.appendChild(el);
+          el.appendChild(caret);
+          var typeChar = function () {
+            ci++;
+            el.childNodes[1].textContent = step.text.slice(0, ci);
+            if (ci < step.text.length) {
+              setTimeout(typeChar, 34 + Math.random() * 40);
+            } else {
+              setTimeout(runStep, 340);
+            }
+          };
+          setTimeout(typeChar, 260);
+        } else {
+          term.appendChild(lineEl(step));
+          term.appendChild(caret);
+          setTimeout(runStep, step.type === "ok" ? 520 : 300);
+        }
+      };
+
+      // start only when the terminal scrolls into view
+      new IntersectionObserver(function (entries, io) {
+        if (!entries[0].isIntersecting) return;
+        io.disconnect();
+        runStep();
+      }, { threshold: 0.3 }).observe(term);
+    }
+  }
+})();
