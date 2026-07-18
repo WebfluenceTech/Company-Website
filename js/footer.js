@@ -13,7 +13,7 @@
             '<svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">' +
               '<rect x="0.5" y="0.5" width="31" height="31" rx="5.5" fill="none" stroke="currentColor" stroke-opacity="0.35"/>' +
               '<path d="M8 23V9l8 9 8-9v14" stroke="url(#mgf)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
-              '<defs><linearGradient id="mgf" x1="8" y1="9" x2="24" y2="23" gradientUnits="userSpaceOnUse"><stop stop-color="#8fb0ff"/><stop offset="1" stop-color="#8fb0ff"/></linearGradient></defs>' +
+              '<defs><linearGradient id="mgf" x1="8" y1="9" x2="24" y2="23" gradientUnits="userSpaceOnUse"><stop stop-color="#ffffff"/><stop offset="1" stop-color="#ffffff"/></linearGradient></defs>' +
             '</svg><span class="brand-name">Meridian</span></a>' +
           '<p class="footer-tag">Senior software engineering.<br>San Francisco · New York.</p>' +
           '<p class="footer-status"><span class="dot ok pulse"></span>All systems operational</p>' +

@@ -530,3 +530,61 @@
     }
   }
 })();
+
+/* ============================================================
+   Noir motion — word-by-word hero reveal + bento spotlight.
+   Skipped under prefers-reduced-motion.
+   ============================================================ */
+
+(function () {
+  "use strict";
+
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- split the display headline into staggered words ---------- */
+  var display = document.querySelector(".hero-stage .display");
+  if (display && !reducedMotion) {
+    var idx = 0;
+    Array.prototype.slice.call(display.childNodes).forEach(function (node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        var words = node.textContent.split(/(\s+)/);
+        var frag = document.createDocumentFragment();
+        words.forEach(function (word) {
+          if (/^\s+$/.test(word) || word === "") {
+            frag.appendChild(document.createTextNode(word));
+          } else {
+            var span = document.createElement("span");
+            span.className = "w";
+            span.style.setProperty("--i", idx++);
+            span.textContent = word;
+            frag.appendChild(span);
+          }
+        });
+        display.replaceChild(frag, node);
+      } else if (node.nodeType === Node.ELEMENT_NODE && node.classList.contains("rotator-wrap")) {
+        node.classList.add("w");
+        node.style.setProperty("--i", idx++);
+      }
+    });
+  }
+
+  /* ---------- bento spotlight tracks the pointer ---------- */
+  var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (fine && !reducedMotion) {
+    Array.prototype.forEach.call(document.querySelectorAll(".bento-tile"), function (tile) {
+      var raf = null;
+      tile.addEventListener("pointermove", function (e) {
+        if (raf) return;
+        raf = requestAnimationFrame(function () {
+          raf = null;
+          var r = tile.getBoundingClientRect();
+          tile.style.setProperty("--mx", ((e.clientX - r.left) / r.width * 100).toFixed(1) + "%");
+          tile.style.setProperty("--my", ((e.clientY - r.top) / r.height * 100).toFixed(1) + "%");
+        });
+      });
+      tile.addEventListener("pointerleave", function () {
+        tile.style.setProperty("--my", "-30%");
+      });
+    });
+  }
+})();
