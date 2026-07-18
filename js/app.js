@@ -588,3 +588,44 @@
     });
   }
 })();
+
+/* ============================================================
+   Edge rails — vertical wordmark left, scroll instrument right.
+   Injected on every page, desktop only, purely decorative.
+   ============================================================ */
+
+(function () {
+  "use strict";
+
+  if (!window.matchMedia("(min-width: 1280px)").matches) return;
+
+  var left = document.createElement("div");
+  left.className = "rail rail-left";
+  left.setAttribute("aria-hidden", "true");
+  left.innerHTML = '<span class="rail-text">Meridian · San Francisco 37.77°N · New York 40.72°N</span>';
+
+  var right = document.createElement("div");
+  right.className = "rail rail-right";
+  right.setAttribute("aria-hidden", "true");
+  var section = (document.title.split("|")[0] || "").trim() || "Meridian";
+  right.innerHTML =
+    '<span class="rail-section">' + section.replace(/&/g, "&amp;").replace(/</g, "&lt;").slice(0, 42) + "</span>" +
+    '<span class="rail-line"></span>' +
+    '<span class="rail-dot"></span>';
+
+  document.body.appendChild(left);
+  document.body.appendChild(right);
+
+  var dot = right.querySelector(".rail-dot");
+  var line = right.querySelector(".rail-line");
+  function place() {
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    var p = max > 0 ? h.scrollTop / max : 0;
+    var top = line.offsetTop + p * line.offsetHeight;
+    dot.style.top = top + "px";
+  }
+  window.addEventListener("scroll", place, { passive: true });
+  window.addEventListener("resize", place);
+  place();
+})();

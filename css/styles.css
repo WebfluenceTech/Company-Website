@@ -29,7 +29,7 @@
   --font-ui: "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
   --font-serif: "Newsreader", Georgia, serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
-  --container: 1440px;
+  --container: 1808px;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease: cubic-bezier(0.23, 1, 0.32, 1);
@@ -65,7 +65,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   width: 100%;
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 clamp(24px, 4vw, 64px);
+  padding: 0 clamp(24px, 4.5vw, 88px);
 }
 
 .skip-link {
@@ -216,7 +216,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .nav-inner {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 clamp(24px, 4vw, 64px);
+  padding: 0 clamp(24px, 4.5vw, 88px);
   height: 68px;
   display: flex;
   align-items: center;
@@ -301,7 +301,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.02fr 1fr;
+  grid-template-columns: 1.05fr 1fr;
   gap: clamp(40px, 4.5vw, 72px);
   align-items: center;
   min-height: 100svh;
@@ -1872,4 +1872,77 @@ a.contact-card:hover strong { color: var(--text); }
   .display .w { animation: none; opacity: 1; transform: none; filter: none; }
   .btn:active, .chip:active, .bento-tile:active, .tab:active { transform: none; }
   .bento-tile { background: var(--card); }
+}
+
+/* ============================================================
+   Edge rails — the gutters become instrument margins
+   ============================================================ */
+
+.rail {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 40;
+  width: 44px;
+  display: none;
+  pointer-events: none;
+}
+.rail-left { left: 0; }
+.rail-right { right: 0; }
+@media (min-width: 1280px) {
+  .rail { display: block; }
+}
+.rail-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+.rail-right .rail-text {
+  transform: translate(-50%, -50%);
+  top: auto;
+  bottom: 96px;
+  transform: translateX(-50%);
+}
+.rail-line {
+  position: absolute;
+  top: 96px;
+  bottom: 200px;
+  left: 50%;
+  width: 1px;
+  background: var(--border);
+}
+.rail-dot {
+  position: absolute;
+  left: 50%;
+  top: var(--p, 0%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text);
+  transform: translate(-50%, -50%);
+  transition: top 0.15s linear;
+}
+.rail-section {
+  position: absolute;
+  top: 96px;
+  left: 50%;
+  transform: translateX(-50%);
+  writing-mode: vertical-rl;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rail-dot { transition: none; }
 }
