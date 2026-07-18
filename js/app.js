@@ -370,3 +370,49 @@
     if (status) status.classList.add("is-shown");
   });
 })();
+
+/* ============================================================
+   Scrollspy — highlight the nav link for the section in view
+   (homepage only; sections map to their hash nav links)
+   ============================================================ */
+
+(function () {
+  "use strict";
+
+  var map = [
+    ["capabilities", 'a[href="#capabilities"]'],
+    ["platform", 'a[href="#platform"]'],
+    ["work", 'a[href="work.html"]'],
+    ["process", 'a[href="#process"]'],
+  ];
+  var pairs = map
+    .map(function (m) {
+      return {
+        section: document.getElementById(m[0]),
+        link: document.querySelector(".nav-links " + m[1]),
+      };
+    })
+    .filter(function (p) { return p.section && p.link; });
+  if (!pairs.length || !("IntersectionObserver" in window)) return;
+
+  var clear = function () {
+    pairs.forEach(function (p) { p.link.classList.remove("is-active"); });
+  };
+  var spy = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      clear();
+      var hit = pairs.filter(function (p) { return p.section === entry.target; })[0];
+      if (hit) hit.link.classList.add("is-active");
+    });
+  }, { rootMargin: "-30% 0px -55% 0px" });
+  pairs.forEach(function (p) { spy.observe(p.section); });
+
+  // above the first section (hero), nothing is highlighted
+  var hero = document.getElementById("top");
+  if (hero) {
+    new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) clear();
+    }, { rootMargin: "-10% 0px -70% 0px" }).observe(hero);
+  }
+})();

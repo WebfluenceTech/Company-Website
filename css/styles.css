@@ -1731,3 +1731,9 @@ section[id] { scroll-margin-top: 84px; }
 @media (max-width: 560px) {
   .form-row { grid-template-columns: 1fr; }
 }
+
+/* scrollspy active nav state */
+.nav-links a.is-active {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+}
